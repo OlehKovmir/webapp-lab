@@ -16,3 +16,6 @@ jobs:
 
       - name: Check PHP
         run: php -v
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
