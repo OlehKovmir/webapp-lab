@@ -21,6 +21,12 @@ jobs:
       - name: Run JS tests
         run: npm test
 
+      - name: Install PHP dependencies
+        run: composer install
+
+      - name: Run PHP tests
+        run: ./vendor/bin/phpunit php-tests 
+
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
         continue-on-error: true
