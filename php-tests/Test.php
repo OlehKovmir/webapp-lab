@@ -2,7 +2,8 @@
 use PHPUnit\Framework\TestCase;
 
 class Test extends TestCase {
-    public function testTrue() {
-        $this->assertTrue(true);
+    public function testArrayCount() {
+        $data = [1, 2, 3];
+        $this->assertCount(3, $data);
     }
 }

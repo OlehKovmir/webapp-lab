@@ -1,10 +1,14 @@
 {
   "name": "webapp-lab",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "eslint": "^9.39.4",
+    "eslint-plugin-security": "^4.0.1",
     "jest": "^30.4.2"
   }
 }

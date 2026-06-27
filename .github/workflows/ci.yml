@@ -10,17 +10,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.4
-
-      - name: Install PHP dependencies
-        run: composer install --ignore-platform-reqs
-
-      - name: Run PHP tests
-        run: ./vendor/bin/phpunit php-tests
-
+      # ======================
+      # Node.js (JS part)
+      # ======================
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -29,9 +21,30 @@ jobs:
       - name: Install JS dependencies
         run: npm install
 
+      - name: Run ESLint
+        run: npm run lint
+
       - name: Run JS tests
         run: npm test
 
+      # ======================
+      # PHP part
+      # ======================
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+          coverage: none
+
+      - name: Install PHP dependencies
+        run: composer install
+
+      - name: Run PHPUnit
+        run: ./vendor/bin/phpunit php-tests
+
+      - name: Run PHPStan
+        run: "./vendor/bin/phpstan analyse php-tests --level=5"
+
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
-        continue-on-error: true
+    continue-on-error: true
